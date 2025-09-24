@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discrete Mathematics Notes</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f1de;
+            color: #333;
+        }
+        .book-container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            color: #556b2f;
+            border-bottom: 2px solid #556b2f;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+        }
+        h2 {
+            font-size: 1.8em;
+        }
+        h3 {
+            font-size: 1.4em;
+            color: #8b4513;
+            border-bottom: 1px dashed #d2b48c;
+        }
+        p, ul, ol {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        strong {
+            color: #8b4513;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 40px;
+            gap: 15px;
+        }
+        .nav-button {
+            padding: 10px 20px;
+            background-color: #556b2f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Palatino Linotype', serif;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .nav-button:hover {
+            background-color: #8b4513;
+        }
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .question {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        #submit-test-button {
+            background-color: #556b2f;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #submit-test-button:hover {
+            background-color: #8b4513;
+        }
+        #result-container {
+            margin-top: 20px;
+            font-size: 1.5em;
+            text-align: center;
+            font-weight: bold;
+            color: #556b2f;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="notes-container" class="book-container">
+        <!-- Content will be dynamically loaded here by JavaScript -->
+    </div>
+
+    <script>
+        const notesContainer = document.getElementById('notes-container');
+        
+        const page1Content = `
+            <h1>Discrete Mathematics</h1>
+            <p>Discrete mathematics is the study of mathematical structures that are fundamentally discrete rather than continuous. It is the language of computer science, as it deals with things like integers, graphs, and logical statements, which are the basis for programming and computation.</p>
+            
+            <h2>1. Logic and Proofs</h2>
+            <p>This is the foundation of mathematical reasoning. We learn how to construct logical arguments and prove theorems.</p>
+            <h3>Propositions and Connectives</h3>
+            <p>A <strong>proposition</strong> is a statement that is either true or false. We use logical connectives to combine propositions:</p>
+            <ul>
+                <li><strong>Conjunction ($\land$):</strong> "and" - $P \land Q$ is true only if both P and Q are true.</li>
+                <li><strong>Disjunction ($\lor$):</strong> "or" - $P \lor Q$ is true if either P or Q or both are true.</li>
+                <li><strong>Negation ($\neg$):</strong> "not" - $\neg P$ is true if P is false.</li>
+                <li><strong>Implication ($\to$):</strong> "if... then..." - $P \to Q$ is false only if P is true and Q is false.</li>
+                <li><strong>Biconditional ($\leftrightarrow$):</strong> "if and only if" - $P \leftrightarrow Q$ is true if P and Q have the same truth value.</li>
+            </ul>
+            <h3>Methods of Proof</h3>
+            <ul>
+                <li><strong>Direct Proof:</strong> To prove $P \to Q$, assume P is true and show that Q must also be true.</li>
+                <li><strong>Proof by Contrapositive:</strong> To prove $P \to Q$, prove the equivalent statement $\neg Q \to \neg P$.</li>
+                <li><strong>Proof by Contradiction:</strong> To prove P, assume $\neg P$ is true and show that this leads to a contradiction.</li>
+                <li><strong>Mathematical Induction:</strong> A powerful technique to prove statements about all natural numbers. It involves a base case and an inductive step.</li>
+            </ul>
+
+            <h2>2. Set Theory</h2>
+            <p>Set theory is the study of collections of objects. It's a fundamental concept in all areas of mathematics and computer science.</p>
+            <h3>Basic Concepts</h3>
+            <ul>
+                <li>A <strong>set</strong> is an unordered collection of distinct objects.</li>
+                <li><strong>Cardinality ($|A|$):</strong> The number of elements in a set A.</li>
+                <li><strong>Subset ($\subseteq$):</strong> A is a subset of B if every element of A is also in B.</li>
+                <li><strong>Power Set ($\mathcal{P}(A)$):</strong> The set of all subsets of A. If $|A| = n$, then $|\mathcal{P}(A)| = 2^n$.</li>
+            </ul>
+            <h3>Operations on Sets</h3>
+            <ul>
+                <li><strong>Union ($\cup$):</strong> $A \cup B$ contains all elements in A, or B, or both.</li>
+                <li><strong>Intersection ($\cap$):</strong> $A \cap B$ contains all elements common to both A and B.</li>
+                <li><strong>Difference ($-$):</strong> $A - B$ contains all elements in A but not in B.</li>
+                <li><strong>Complement ($\bar{A}$):</strong> All elements not in A (with respect to a universal set).</li>
+            </ul>
+
+            <div class="button-container">
+                <button id="next-page-button" class="nav-button">Next Page &gt;</button>
+                <button id="start-test-button" class="nav-button">Start Test</button>
+            </div>
+        `;
+
+        const page2Content = `
+            <h1>Combinatorics and Recurrence Relations</h1>
+            <p><strong>Combinatorics</strong> is the branch of mathematics that studies the enumeration, combination, and permutation of elements of sets. It's all about counting!</p>
+            
+            <h2>1. Counting Techniques</h2>
+            <ul>
+                <li><strong>Product Rule:</strong> If a procedure can be broken down into a sequence of two tasks, and there are $n_1$ ways to do the first task and $n_2$ ways to do the second, then there are $n_1 \cdot n_2$ ways to do the procedure.</li>
+                <li><strong>Sum Rule:</strong> If a task can be done in one of $n_1$ ways or in one of $n_2$ ways, where none of the set of $n_1$ ways is the same as any of the set of $n_2$ ways, then there are $n_1 + n_2$ ways to do the task.</li>
+                <li><strong>Permutations:</strong> The number of ways to arrange a set of objects. The number of $r$-permutations of a set of $n$ elements is $P(n, r) = \frac{n!}{(n-r)!}$.</li>
+                <li><strong>Combinations:</strong> The number of ways to choose a subset of objects where order does not matter. The number of $r$-combinations is $C(n, r) = \frac{n!}{r!(n-r)!}$.</li>
+            </ul>
+
+            <h2>2. Recurrence Relations</h2>
+            <p>A recurrence relation is an equation that recursively defines a sequence or a multidimensional array of values, once one or more initial terms are given.</p>
+            <h3>Examples</h3>
+            <ul>
+                <li><strong>Fibonacci Sequence:</strong> $F_n = F_{n-1} + F_{n-2}$ with initial conditions $F_0 = 0$ and $F_1 = 1$.</li>
+                <li><strong>Tower of Hanoi:</strong> The minimum number of moves to solve the Tower of Hanoi puzzle with $n$ disks is given by the recurrence relation $H_n = 2H_{n-1} + 1$.</li>
+            </ul>
+            <div class="button-container">
+                <button id="next-page-button" class="nav-button">Next Page &gt;</button>
+                <button id="start-test-button" class="nav-button">Start Test</button>
+            </div>
+        `;
+
+        const testContent = `
+            <h1>Discrete Mathematics Test</h1>
+            <p>Choose the best answer for each of the following 10 questions.</p>
+            <form id="quiz-form">
+                <div class="question">
+                    <p>1. What is the negation of the statement "$P \lor Q$"?</p>
+                    <label><input type="radio" name="q1" value="A"> A. $\neg P \lor \neg Q$</label>
+                    <label><input type="radio" name="q1" value="B"> B. $\neg P \land \neg Q$</label>
+                    <label><input type="radio" name="q1" value="C"> C. $P \land Q$</label>
+                    <label><input type="radio" name="q1" value="D"> D. $\neg(P \land Q)$</label>
+                </div>
+                <div class="question">
+                    <p>2. How many elements are in the power set of a set with 5 elements?</p>
+                    <label><input type="radio" name="q2" value="A"> A. 5</label>
+                    <label><input type="radio" name="q2" value="B"> B. 10</label>
+                    <label><input type="radio" name="q2" value="C"> C. 25</label>
+                    <label><input type="radio" name="q2" value="D"> D. 32</label>
+                </div>
+                <div class="question">
+                    <p>3. What property is a relation that is reflexive, symmetric, and transitive?</p>
+                    <label><input type="radio" name="q3" value="A"> A. Partial order</label>
+                    <label><input type="radio" name="q3" value="B"> B. Equivalence relation</label>
+                    <label><input type="radio" name="q3" value="C"> C. Function</label>
+                    <label><input type="radio" name="q3" value="D"> D. Transitive closure</label>
+                </div>
+                <div class="question">
+                    <p>4. Which of the following is a connected graph with no cycles?</p>
+                    <label><input type="radio" name="q4" value="A"> A. A tree</label>
+                    <label><input type="radio" name="q4" value="B"> B. A complete graph</label>
+                    <label><input type="radio" name="q4" value="C"> C. A directed graph</label>
+                    <label><input type="radio" name="q4" value="D"> D. A bipartite graph</label>
+                </div>
+                <div class="question">
+                    <p>5. What is the value of $P(5, 2)$?</p>
+                    <label><input type="radio" name="q5" value="A"> A. 10</label>
+                    <label><input type="radio" name="q5" value="B"> B. 20</label>
+                    <label><input type="radio" name="q5" value="C"> C. 120</label>
+                    <label><input type="radio" name="q5" value="D"> D. 12</label>
+                </div>
+                <div class="question">
+                    <p>6. If A and B are sets, what does $A \cap B$ represent?</p>
+                    <label><input type="radio" name="q6" value="A"> A. The union of A and B</label>
+                    <label><input type="radio" name="q6" value="B"> B. The difference between A and B</label>
+                    <label><input type="radio" name="q6" value="C"> C. The intersection of A and B</label>
+                    <label><input type="radio" name="q6" value="D"> D. The complement of B</label>
+                </div>
+                <div class="question">
+                    <p>7. What type of proof assumes the negation of the conclusion and shows it leads to a contradiction?</p>
+                    <label><input type="radio" name="q7" value="A"> A. Direct proof</label>
+                    <label><input type="radio" name="q7" value="B"> B. Proof by contrapositive</label>
+                    <label><input type="radio" name="q7" value="C"> C. Proof by contradiction</label>
+                    <label><input type="radio" name="q7" value="D"> D. Mathematical induction</label>
+                </div>
+                <div class="question">
+                    <p>8. What is a function that is both one-to-one and onto called?</p>
+                    <label><input type="radio" name="q8" value="A"> A. Bijective</label>
+                    <label><input type="radio" name="q8" value="B"> B. Injective</label>
+                    <label><input type="radio" name="q8" value="C"> C. Surjective</label>
+                    <label><input type="radio" name="q8" value="D"> D. Recursive</label>
+                </div>
+                <div class="question">
+                    <p>9. The number of moves for the Tower of Hanoi puzzle is an example of what?</p>
+                    <label><input type="radio" name="q9" value="A"> A. A combinatorial problem</label>
+                    <label><input type="radio" name="q9" value="B"> B. A graph traversal</label>
+                    <label><input type="radio" name="q9" value="C"> C. A recurrence relation</label>
+                    <label><input type="radio" name="q9" value="D"> D. A logical proof</label>
+                </div>
+                <div class="question">
+                    <p>10. What is a statement that is either true or false called?</p>
+                    <label><input type="radio" name="q10" value="A"> A. An argument</label>
+                    <label><input type="radio" name="q10" value="B"> B. A theorem</label>
+                    <label><input type="radio" name="q10" value="C"> C. A predicate</label>
+                    <label><input type="radio" name="q10" value="D"> D. A proposition</label>
+                </div>
+                <button type="button" id="submit-test-button">Submit Test</button>
+            </form>
+            <div id="result-container" class="hidden"></div>
+        `;
+        
+        // Define correct answers
+        const correctAnswers = {
+            q1: 'B', q2: 'D', q3: 'B', q4: 'A', q5: 'B',
+            q6: 'C', q7: 'C', q8: 'A', q9: 'C', q10: 'D',
+        };
+
+        function loadPage(page) {
+            notesContainer.innerHTML = page;
+            setupEventListeners();
+        }
+        
+        function setupEventListeners() {
+            const nextPageButton = document.getElementById('next-page-button');
+            const startTestButton = document.getElementById('start-test-button');
+            const submitTestButton = document.getElementById('submit-test-button');
+
+            if (nextPageButton) {
+                nextPageButton.addEventListener('click', () => {
+                    loadPage(page2Content);
+                    // The button for the next page becomes the "start test" button
+                    const newNextPageButton = document.getElementById('next-page-button');
+                    if (newNextPageButton) {
+                         newNextPageButton.classList.add('hidden');
+                    }
+                });
+            }
+
+            if (startTestButton) {
+                startTestButton.addEventListener('click', () => {
+                    loadPage(testContent);
+                });
+            }
+
+            if (submitTestButton) {
+                submitTestButton.addEventListener('click', () => {
+                    const form = document.getElementById('quiz-form');
+                    const resultContainer = document.getElementById('result-container');
+                    let score = 0;
+                    for (let i = 1; i <= 10; i++) {
+                        const questionName = `q${i}`;
+                        const selectedOption = form.querySelector(`input[name="${questionName}"]:checked`);
+                        if (selectedOption && selectedOption.value === correctAnswers[questionName]) {
+                            score++;
+                        }
+                    }
+                    resultContainer.textContent = `You scored ${score} out of 10!`;
+                    resultContainer.classList.remove('hidden');
+                });
+            }
+        }
+
+        // Load the initial content on page load
+        window.onload = () => {
+            loadPage(page1Content);
+        };
+    </script>
+
+</body>
+</html>

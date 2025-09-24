@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Subjects</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+        }
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        .container {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #1a73e8;
+            font-weight: bold;
+        }
+        .form-select {
+            border: 1px solid #ced4da;
+        }
+        .btn-primary {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+        }
+        .btn-primary:hover {
+            background-color: #135dbe;
+            border-color: #135dbe;
+        }
+        #subjects-display {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f0fe;
+            border-radius: 10px;
+            border: 1px solid #c8dcfc;
+        }
+        #subjects-display h2 {
+            color: #1a73e8;
+            border-bottom: 2px solid #a4c2f4;
+            padding-bottom: 10px;
+        }
+        #subjects-display ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #subjects-display li {
+            background-color: #f7f9fc;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        #subjects-display li:hover {
+            transform: translateY(-2px);
+            background-color: #e2f0ff;
+        }
+        .subject-link {
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Engineering Hub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logout-btn">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container text-center">
+        <h1 class="mb-3" id="welcome-message">Welcome, Engineer! 🎓</h1>
+        <p class="lead text-muted">Choose your discipline and year to see your subjects.</p>
+        <div class="row g-3 justify-content-center mt-4">
+            <div class="col-md-6 col-lg-4">
+                <select id="discipline-select" class="form-select">
+                    <option value="">Select Discipline</option>
+                    <option value="MECH">Mechanical Engineering</option>
+                    <option value="CIVIL">Civil Engineering</option>
+                    <option value="EEE">Electrical and Electronics Engineering</option>
+                    <option value="CSE">Computer Science and Engineering</option>
+                    <option value="CHEM">Chemical Engineering</option>
+                    <option value="AIML">Artificial Intelligence and Machine Learning (AI&ML)</option>
+                    <option value="AIDS">AI and Data Science</option>
+                    <option value="AERO">Aerospace/Aeronautical Engineering</option>
+                    <option value="AUTO">Automobile Engineering</option>
+                    <option value="BME">Biomedical Engineering</option>
+                    <option value="BT">Biotechnology Engineering</option>
+                    <option value="ECE">Electronics and Communication Engineering</option>
+                    <option value="ENV">Environmental Engineering</option>
+                    <option value="IT">Information Technology</option>
+                    <option value="ICE">Instrumentation and Control Engineering</option>
+                    <option value="MSE">Materials Science and Engineering</option>
+                    <option value="MECHA">Mechatronics Engineering</option>
+                    <option value="META">Metallurgical Engineering</option>
+                    <option value="PE">Petroleum Engineering</option>
+                    <option value="RAI">Robotics and Artificial Intelligence</option>
+                    <option value="SE">Software Engineering</option>
+                </select>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <select id="year-select" class="form-select">
+                    <option value="">Select Year</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <button id="show-subjects-btn" class="btn btn-primary mt-3">Show Subjects</button>
+            </div>
+        </div>
+        <div id="subjects-display">
+            </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const subjectsData = {
+            "MECH": {
+                "1": [
+                    { name: "Mathematics I", file: "Mathematics_I.html" },
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Computer Programming", file: "Computer_Programming.html" },
+                    { name: "Engineering Graphics", file: "Engineering_Graphics.html" },
+                    { name: "Engineering Mechanics", file: "Engineering_Mechanics.html" }
+                ],
+                "2": [
+                    { name: "Thermodynamics", file: "Thermodynamics.html" },
+                    { name: "Fluid Mechanics", file: "Fluid_Mechanics.html" },
+                    { name: "Strength of Materials", file: "Strength_of_Materials.html" },
+                    { name: "Kinematics of Machinery", file: "Kinematics_of_Machinery.html" },
+                    { name: "Material Science", file: "Material_Science.html" }
+                ],
+                "3": [
+                    { name: "Heat and Mass Transfer", file: "Heat_and_Mass_Transfer.html" },
+                    { name: "Dynamics of Machinery", file: "Dynamics_of_Machinery.html" },
+                    { name: "Fluid Power Engineering", file: "Fluid_Power_Engineering.html" },
+                    { name: "Machine Design", file: "Machine_Design.html" },
+                    { name: "IC Engines", file: "IC_Engines.html" }
+                ],
+                "4": [
+                    { name: "Industrial Engineering", file: "Industrial_Engineering.html" },
+                    { name: "CAD/CAM", file: "CAD-CAM.html" },
+                    { name: "Refrigeration and Air Conditioning", file: "Refrigeration_and_Air_Conditioning.html" },
+                    { name: "Finite Element Method", file: "Finite_Element_Method.html" },
+                    { name: "Operations Research", file: "Operations_Research.html" }
+                ]
+            },
+            "CIVIL": {
+                "1": [
+                    { name: "Mathematics I", file: "Mathematics_I.html" },
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Computer Programming", file: "Computer_Programming.html" },
+                    { name: "Engineering Graphics", file: "Engineering_Graphics.html" },
+                    { name: "Engineering Mechanics", file: "Engineering_Mechanics.html" }
+                ],
+                "2": [
+                    { name: "Building Materials", file: "Building_Materials.html" },
+                    { name: "Fluid Mechanics", file: "Fluid_Mechanics.html" },
+                    { name: "Surveying", file: "Surveying.html" },
+                    { name: "Structural Analysis", file: "Structural_Analysis.html" },
+                    { name: "Geology", file: "Geology.html" }
+                ],
+                "3": [
+                    { name: "Water Resources Engineering", file: "Water_Resources_Engineering.html" },
+                    { name: "Transportation Engineering", file: "Transportation_Engineering.html" },
+                    { name: "Geotechnical Engineering", file: "Geotechnical_Engineering.html" },
+                    { name: "Concrete Structures", file: "Concrete_Structures.html" },
+                    { name: "Environmental Engineering", file: "Environmental_Engineering.html" }
+                ],
+                "4": [
+                    { name: "Construction Management", file: "Construction_Management.html" },
+                    { name: "Hydrology", file: "Hydrology.html" },
+                    { name: "Earthquake Engineering", file: "Earthquake_Engineering.html" },
+                    { name: "Remote Sensing and GIS", file: "Remote_Sensing_and_GIS.html" },
+                    { name: "Urban Planning", file: "Urban_Planning.html" }
+                ]
+            },
+            "EEE": {
+                "1": [
+                    { name: "Engineering Mathematics I", file: "Engineering_Mathematics_I.html" },
+                    { name: "Engineering Physics", file: "Engineering_Physics.html" },
+                    { name: "Engineering Chemistry", file: "Engineering_Chemistry.html" },
+                    { name: "Basic Electrical Engineering", file: "Basic_Electrical_Engineering.html" },
+                    { name: "Computer Programming", file: "Computer_Programming.html" }
+                ],
+                "2": [
+                    { name: "Network Analysis", file: "Network_Analysis.html" },
+                    { name: "Analog Electronics", file: "Analog_Electronics.html" },
+                    { name: "Digital Electronics", file: "Digital_Electronics.html" },
+                    { name: "Control Systems", file: "Control_Systems.html" },
+                    { name: "Electrical Machines", file: "Electrical_Machines.html" }
+                ],
+                "3": [
+                    { name: "Power Systems", file: "Power_Systems.html" },
+                    { name: "Power Electronics", file: "Power_Electronics.html" },
+                    { name: "Microprocessors and Microcontrollers", file: "Microprocessors_and_Microcontrollers.html" },
+                    { name: "Signal Processing", file: "Signal_Processing.html" },
+                    { name: "Electromagnetic Fields", file: "Electromagnetic_Fields.html" }
+                ],
+                "4": [
+                    { name: "Renewable Energy Systems", file: "Renewable_Energy_Systems.html" },
+                    { name: "Industrial Automation", file: "Industrial_Automation.html" },
+                    { name: "High Voltage Engineering", file: "High_Voltage_Engineering.html" },
+                    { name: "Embedded Systems", file: "Embedded_Systems.html" },
+                    { name: "Electric Drives", file: "Electric_Drives.html" }
+                ]
+            },
+            "CSE": {
+                "1": [
+                    { name: "Mathematics I", file: "Mathematics_I.html" },
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Computer Programming", file: "Computer_Programming.html" },
+                    { name: "Engineering Graphics", file: "Engineering_Graphics.html" },
+                    { name: "Basic Electrical Engineering", file: "Basic_Electrical_Engineering.html" }
+                ],
+                "2": [
+                    { name: "Data Structures", file: "Data_Structures.html" },
+                    { name: "Algorithms", file: "Algorithms.html" },
+                    { name: "Database Management Systems", file: "Database_Management_Systems.html" },
+                    { name: "Digital Logic", file: "Digital_Logic.html" },
+                    { name: "Discrete Mathematics", file: "Discrete_Mathematics.html" }
+                ],
+                "3": [
+                    { name: "Operating Systems", file: "Operating_Systems.html" },
+                    { name: "Computer Networks", file: "Computer_Networks.html" },
+                    { name: "Software Engineering", file: "Software_Engineering.html" },
+                    { name: "Artificial Intelligence", file: "Artificial_Intelligence.html" },
+                    { name: "Theory of Computation", file: "Theory_of_Computation.html" }
+                ],
+                "4": [
+                    { name: "Compiler Design", file: "Compiler_Design.html" },
+                    { name: "Machine Learning", file: "Machine_Learning.html" },
+                    { name: "Cloud Computing", file: "Cloud_Computing.html" },
+                    { name: "Web Technologies", file: "Web_Technologies.html" },
+                    { name: "Cyber Security", file: "Cyber_Security.html" }
+                ]
+            },
+            "CHEM": {
+                "1": [
+                    { name: "Mathematics I", file: "Mathematics_I.html" },
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Chemistry", file: "Chemistry.html" },
+                    { name: "Computer Programming", file: "Computer_Programming.html" },
+                    { name: "Engineering Mechanics", file: "Engineering_Mechanics.html" }
+                ],
+                "2": [
+                    { name: "Fluid Mechanics", file: "Fluid_Mechanics.html" },
+                    { name: "Chemical Engineering Thermodynamics", file: "Chemical_Engineering_Thermodynamics.html" },
+                    { name: "Heat Transfer Operations", file: "Heat_Transfer_Operations.html" },
+                    { name: "Mass Transfer Operations", file: "Mass_Transfer_Operations.html" },
+                    { name: "Process Calculations", file: "Process_Calculations.html" }
+                ],
+                "3": [
+                    { name: "Chemical Reaction Engineering", file: "Chemical_Reaction_Engineering.html" },
+                    { name: "Process Equipment Design", file: "Process_Equipment_Design.html" },
+                    { name: "Process Dynamics and Control", file: "Process_Dynamics_and_Control.html" },
+                    { name: "Environmental Engineering", file: "Environmental_Engineering.html" },
+                    { name: "Polymer Science", file: "Polymer_Science.html" }
+                ],
+                "4": [
+                    { name: "Process Modeling and Simulation", file: "Process_Modeling_and_Simulation.html" },
+                    { name: "Biochemical Engineering", file: "Biochemical_Engineering.html" },
+                    { name: "Petroleum Refinery Engineering", file: "Petroleum_Refinery_Engineering.html" },
+                    { name: "Plant Design and Economics", file: "Plant_Design_and_Economics.html" },
+                    { name: "Catalysis", file: "Catalysis.html" }
+                ]
+            },
+            "AIML": {
+                "1": [
+                    { name: "Linear Algebra", file: "Linear_Algebra.html" },
+                    { name: "Calculus", file: "Calculus.html" },
+                    { name: "Probability & Statistics", file: "Probability_and_Statistics.html" },
+                    { name: "Python Programming", file: "Python_Programming.html" },
+                    { name: "Data Structures", file: "Data_Structures.html" }
+                ],
+                "2": [
+                    { name: "Discrete Mathematics", file: "Discrete_Mathematics.html" },
+                    { name: "Database Management Systems", file: "Database_Management_Systems.html" },
+                    { name: "Machine Learning", file: "Machine_Learning.html" },
+                    { name: "Artificial Intelligence", file: "Artificial_Intelligence.html" },
+                    { name: "Computer Networks", file: "Computer_Networks.html" }
+                ],
+                "3": [
+                    { name: "Deep Learning", file: "Deep_Learning.html" },
+                    { name: "Natural Language Processing", file: "Natural_Language_Processing.html" },
+                    { name: "Computer Vision", file: "Computer_Vision.html" },
+                    { name: "Reinforcement Learning", file: "Reinforcement_Learning.html" },
+                    { name: "Big Data Analytics", file: "Big_Data_Analytics.html" }
+                ],
+                "4": [
+                    { name: "Cloud Computing for AI", file: "Cloud_Computing_for_AI.html" },
+                    { name: "Ethical AI", file: "Ethical_AI.html" },
+                    { name: "Robotics", file: "Robotics.html" },
+                    { name: "AI in IoT", file: "AI_in_IoT.html" },
+                    { name: "Quantum Computing", file: "Quantum_Computing.html" }
+                ]
+            },
+            "AIDS": {
+                "1": [
+                    { name: "Multivariable Calculus", file: "Multivariable_Calculus.html" },
+                    { name: "Probability and Statistics", file: "Probability_and_Statistics.html" },
+                    { name: "Introduction to Data Science", file: "Introduction_to_Data_Science.html" },
+                    { name: "Programming with Python", file: "Programming_with_Python.html" },
+                    { name: "Data Structures", file: "Data_Structures.html" }
+                ],
+                "2": [
+                    { name: "Design and Analysis of Algorithms", file: "Design_and_Analysis_of_Algorithms.html" },
+                    { name: "Database Management Systems", file: "Database_Management_Systems.html" },
+                    { name: "Statistical Methods for Data Science", file: "Statistical_Methods_for_Data_Science.html" },
+                    { name: "Data Mining", file: "Data_Mining.html" },
+                    { name: "Data Visualization", file: "Data_Visualization.html" }
+                ],
+                "3": [
+                    { name: "Big Data Analytics", file: "Big_Data_Analytics.html" },
+                    { name: "Machine Learning", file: "Machine_Learning.html" },
+                    { name: "Artificial Intelligence", file: "Artificial_Intelligence.html" },
+                    { name: "Web and Text Mining", file: "Web_and_Text_Mining.html" },
+                    { name: "Cloud Computing", file: "Cloud_Computing.html" }
+                ],
+                "4": [
+                    { name: "Deep Learning", file: "Deep_Learning.html" },
+                    { name: "Natural Language Processing", file: "Natural_Language_Processing.html" },
+                    { name: "Cyber Security for Data", file: "Cyber_Security_for_Data.html" },
+                    { name: "Business Intelligence", file: "Business_Intelligence.html" },
+                    { name: "Research Project", file: "Research_Project.html" }
+                ]
+            },
+            "AERO": {
+                "1": [
+                    { name: "Engineering Mathematics", file: "Engineering_Mathematics.html" },
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Engineering Graphics", file: "Engineering_Graphics.html" },
+                    { name: "Computer Programming", file: "Computer_Programming.html" },
+                    { name: "Thermodynamics", file: "Thermodynamics.html" }
+                ],
+                "2": [
+                    { name: "Aerodynamics", file: "Aerodynamics.html" },
+                    { name: "Mechanics of Flight", file: "Mechanics_of_Flight.html" },
+                    { name: "Aircraft Structures", file: "Aircraft_Structures.html" },
+                    { name: "Flight Dynamics", file: "Flight_Dynamics.html" },
+                    { name: "Aerospace Materials", file: "Aerospace_Materials.html" }
+                ],
+                "3": [
+                    { name: "Aircraft Design", file: "Aircraft_Design.html" },
+                    { name: "Propulsion Systems", file: "Propulsion_Systems.html" },
+                    { name: "Aeroelasticity", file: "Aeroelasticity.html" },
+                    { name: "Space Mechanics", file: "Space_Mechanics.html" },
+                    { name: "Control Systems", file: "Control_Systems.html" }
+                ],
+                "4": [
+                    { name: "Computational Fluid Dynamics", file: "Computational_Fluid_Dynamics.html" },
+                    { name: "Avionics", file: "Avionics.html" },
+                    { name: "UAVs and Drones", file: "UAVs_and_Drones.html" },
+                    { name: "Rocketry and Missiles", file: "Rocketry_and_Missiles.html" },
+                    { name: "Satellite Communication", file: "Satellite_Communication.html" }
+                ]
+            },
+            "AUTO": {
+                "1": [
+                    { name: "Engineering Mathematics", file: "Engineering_Mathematics.html" },
+                    { name: "Engineering Physics", file: "Engineering_Physics.html" },
+                    { name: "Engineering Graphics", file: "Engineering_Graphics.html" },
+                    { name: "Thermodynamics", file: "Thermodynamics.html" },
+                    { name: "Solid Mechanics", file: "Solid_Mechanics.html" }
+                ],
+                "2": [
+                    { name: "Fluid Mechanics and Machinery", file: "Fluid_Mechanics_and_Machinery.html" },
+                    { name: "Automotive Engines", file: "Automotive_Engines.html" },
+                    { name: "Automotive Chassis", file: "Automotive_Chassis.html" },
+                    { name: "Theory of Machines", file: "Theory_of_Machines.html" },
+                    { name: "Automotive Electrical Systems", file: "Automotive_Electrical_Systems.html" }
+                ],
+                "3": [
+                    { name: "Automotive Transmission", file: "Automotive_Transmission.html" },
+                    { name: "Engine Design", file: "Engine_Design.html" },
+                    { name: "Automotive Aerodynamics", file: "Automotive_Aerodynamics.html" },
+                    { name: "Vehicle Dynamics", file: "Vehicle_Dynamics.html" },
+                    { name: "Heat Transfer and Combustion", file: "Heat_Transfer_and_Combustion.html" }
+                ],
+                "4": [
+                    { name: "Automotive Pollution and Control", file: "Automotive_Pollution_and_Control.html" },
+                    { name: "Electric and Hybrid Vehicles", file: "Electric_and_Hybrid_Vehicles.html" },
+                    { name: "Vehicle Maintenance", file: "Vehicle_Maintenance.html" },
+                    { name: "CAD/CAM", file: "CAD-CAM.html" },
+                    { name: "Industrial Management", file: "Industrial_Management.html" }
+                ]
+            },
+            "BME": {
+                "1": [
+                    { name: "Mathematics", file: "Mathematics.html" },
+                    { name: "Biology", file: "Biology.html" },
+                    { name: "Chemistry", file: "Chemistry.html" },
+                    { name: "Biomedical Instrumentation", file: "Biomedical_Instrumentation.html" },
+                    { name: "Human Anatomy and Physiology", file: "Human_Anatomy_and_Physiology.html" }
+                ],
+                "2": [
+                    { name: "Biomaterials", file: "Biomaterials.html" },
+                    { name: "Biophysics", file: "Biophysics.html" },
+                    { name: "Biofluid Mechanics", file: "Biofluid_Mechanics.html" },
+                    { name: "Medical Sensors", file: "Medical_Sensors.html" },
+                    { name: "Circuit Analysis", file: "Circuit_Analysis.html" }
+                ],
+                "3": [
+                    { name: "Digital Signal Processing", file: "Digital_Signal_Processing.html" },
+                    { name: "Medical Imaging", file: "Medical_Imaging.html" },
+                    { name: "Biocontrol Systems", file: "Biocontrol_Systems.html" },
+                    { name: "Rehabilitation Engineering", file: "Rehabilitation_Engineering.html" },
+                    { name: "Genetic Engineering", file: "Genetic_Engineering.html" }
+                ],
+                "4": [
+                    { name: "Tissue Engineering", file: "Tissue_Engineering.html" },
+                    { name: "Nanotechnology in Medicine", file: "Nanotechnology_in_Medicine.html" },
+                    { name: "Artificial Organs", file: "Artificial_Organs.html" },
+                    { name: "Clinical Engineering", file: "Clinical_Engineering.html" },
+                    { name: "Hospital Management", file: "Hospital_Management.html" }
+                ]
+            },
+            "BT": {
+                "1": [
+                    { name: "Mathematics", file: "Mathematics.html" },
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Chemistry", file: "Chemistry.html" },
+                    { name: "Biochemistry", file: "Biochemistry.html" },
+                    { name: "Microbiology", file: "Microbiology.html" }
+                ],
+                "2": [
+                    { name: "Molecular Biology", file: "Molecular_Biology.html" },
+                    { name: "Genetics", file: "Genetics.html" },
+                    { name: "Bioinformatics", file: "Bioinformatics.html" },
+                    { name: "Biochemical Engineering", file: "Biochemical_Engineering.html" },
+                    { name: "Immunology", file: "Immunology.html" }
+                ],
+                "3": [
+                    { name: "Enzyme Technology", file: "Enzyme_Technology.html" },
+                    { name: "Genetic Engineering", file: "Genetic_Engineering.html" },
+                    { name: "Fermentation Technology", file: "Fermentation_Technology.html" },
+                    { name: "Plant and Animal Biotechnology", file: "Plant_and_Animal_Biotechnology.html" },
+                    { name: "Downstream Processing", file: "Downstream_Processing.html" }
+                ],
+                "4": [
+                    { name: "Nanobiotechnology", file: "Nanobiotechnology.html" },
+                    { name: "Environmental Biotechnology", file: "Environmental_Biotechnology.html" },
+                    { name: "Bioprocess Plant Design", file: "Bioprocess_Plant_Design.html" },
+                    { name: "Food Biotechnology", file: "Food_Biotechnology.html" },
+                    { name: "Medical Biotechnology", file: "Medical_Biotechnology.html" }
+                ]
+            },
+            "ECE": {
+                "1": [
+                    { name: "Mathematics I", file: "Mathematics_I.html" },
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Computer Programming", file: "Computer_Programming.html" },
+                    { name: "Engineering Graphics", file: "Engineering_Graphics.html" },
+                    { name: "Basic Electrical Engineering", file: "Basic_Electrical_Engineering.html" }
+                ],
+                "2": [
+                    { name: "Electronic Devices and Circuits", file: "Electronic_Devices_and_Circuits.html" },
+                    { name: "Signals and Systems", file: "Signals_and_Systems.html" },
+                    { name: "Network Theory", file: "Network_Theory.html" },
+                    { name: "Analog Communication", file: "Analog_Communication.html" },
+                    { name: "Electromagnetic Fields", file: "Electromagnetic_Fields.html" }
+                ],
+                "3": [
+                    { name: "Digital Communication", file: "Digital_Communication.html" },
+                    { name: "Microprocessors and Microcontrollers", file: "Microprocessors_and_Microcontrollers.html" },
+                    { name: "Control Systems", file: "Control_Systems.html" },
+                    { name: "Digital Signal Processing", file: "Digital_Signal_Processing.html" },
+                    { name: "VLSI Design", file: "VLSI_Design.html" }
+                ],
+                "4": [
+                    { name: "Antennas and Wave Propagation", file: "Antennas_and_Wave_Propagation.html" },
+                    { name: "Microwave Engineering", file: "Microwave_Engineering.html" },
+                    { name: "Embedded Systems", file: "Embedded_Systems.html" },
+                    { name: "Wireless Communication", file: "Wireless_Communication.html" },
+                    { name: "Optical Communication", file: "Optical_Communication.html" }
+                ]
+            },
+            "ENV": {
+                "1": [
+                    { name: "Mathematics", file: "Mathematics.html" },
+                    { name: "Chemistry", file: "Chemistry.html" },
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Engineering Drawing", file: "Engineering_Drawing.html" },
+                    { name: "Ecology and Ecosystem Engineering", file: "Ecology_and_Ecosystem_Engineering.html" }
+                ],
+                "2": [
+                    { name: "Hydraulics", file: "Hydraulics.html" },
+                    { name: "Water Supply Engineering", file: "Water_Supply_Engineering.html" },
+                    { name: "Solid Waste Management", file: "Solid_Waste_Management.html" },
+                    { name: "Wastewater Treatment", file: "Wastewater_Treatment.html" },
+                    { name: "Air Pollution and Control", file: "Air_Pollution_and_Control.html" }
+                ],
+                "3": [
+                    { name: "Environmental Chemistry", file: "Environmental_Chemistry.html" },
+                    { name: "GIS and Remote Sensing", file: "GIS_and_Remote_Sensing.html" },
+                    { name: "Hazardous Waste Management", file: "Hazardous_Waste_Management.html" },
+                    { name: "Noise Pollution Control", file: "Noise_Pollution_Control.html" },
+                    { name: "Environmental Impact Assessment", file: "Environmental_Impact_Assessment.html" }
+                ],
+                "4": [
+                    { name: "Environmental Law and Policy", file: "Environmental_Law_and_Policy.html" },
+                    { name: "Sustainable Development", file: "Sustainable_Development.html" },
+                    { name: "Renewable Energy", file: "Renewable_Energy.html" },
+                    { name: "Climate Change Engineering", file: "Climate_Change_Engineering.html" },
+                    { name: "Industrial Hygiene", file: "Industrial_Hygiene.html" }
+                ]
+            },
+            "IT": {
+                "1": [
+                    { name: "Mathematics I", file: "Mathematics_I.html" },
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Computer Programming", file: "Computer_Programming.html" },
+                    { name: "Engineering Graphics", file: "Engineering_Graphics.html" },
+                    { name: "Basic Electrical Engineering", file: "Basic_Electrical_Engineering.html" }
+                ],
+                "2": [
+                    { name: "Data Structures and Algorithms", file: "Data_Structures_and_Algorithms.html" },
+                    { name: "Object-Oriented Programming", file: "Object-Oriented_Programming.html" },
+                    { name: "Database Management Systems", file: "Database_Management_Systems.html" },
+                    { name: "Computer Organization", file: "Computer_Organization.html" },
+                    { name: "Discrete Mathematics", file: "Discrete_Mathematics.html" }
+                ],
+                "3": [
+                    { name: "Operating Systems", file: "Operating_Systems.html" },
+                    { name: "Computer Networks", file: "Computer_Networks.html" },
+                    { name: "Software Engineering", file: "Software_Engineering.html" },
+                    { name: "Web Technologies", file: "Web_Technologies.html" },
+                    { name: "Cyber Security", file: "Cyber_Security.html" }
+                ],
+                "4": [
+                    { name: "Cloud Computing", file: "Cloud_Computing.html" },
+                    { name: "Artificial Intelligence", file: "Artificial_Intelligence.html" },
+                    { name: "Data Science", file: "Data_Science.html" },
+                    { name: "Mobile Application Development", file: "Mobile_Application_Development.html" },
+                    { name: "Information Security", file: "Information_Security.html" }
+                ]
+            },
+            "ICE": {
+                "1": [
+                    { name: "Engineering Mathematics", file: "Engineering_Mathematics.html" },
+                    { name: "Engineering Physics", file: "Engineering_Physics.html" },
+                    { name: "Basic Electronics", file: "Basic_Electronics.html" },
+                    { name: "Network Theory", file: "Network_Theory.html" },
+                    { name: "Sensors and Transducers", file: "Sensors_and_Transducers.html" }
+                ],
+                "2": [
+                    { name: "Linear Integrated Circuits", file: "Linear_Integrated_Circuits.html" },
+                    { name: "Digital Signal Processing", file: "Digital_Signal_Processing.html" },
+                    { name: "Process Control", file: "Process_Control.html" },
+                    { name: "Industrial Instrumentation", file: "Industrial_Instrumentation.html" },
+                    { name: "Control Systems", file: "Control_Systems.html" }
+                ],
+                "3": [
+                    { name: "Analytical Instrumentation", file: "Analytical_Instrumentation.html" },
+                    { name: "Microprocessors and Microcontrollers", file: "Microprocessors_and_Microcontrollers.html" },
+                    { name: "Power Electronics", file: "Power_Electronics.html" },
+                    { name: "Robotics", file: "Robotics.html" },
+                    { name: "PLC and DCS", file: "PLC_and_DCS.html" }
+                ],
+                "4": [
+                    { name: "Biomedical Instrumentation", file: "Biomedical_Instrumentation.html" },
+                    { name: "Automation and Control", file: "Automation_and_Control.html" },
+                    { name: "Embedded Systems", file: "Embedded_Systems.html" },
+                    { name: "IoT in Instrumentation", file: "IoT_in_Instrumentation.html" },
+                    { name: "Machine Vision", file: "Machine_Vision.html" }
+                ]
+            },
+            "MSE": {
+                "1": [
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Chemistry", file: "Chemistry.html" },
+                    { name: "Mathematics", file: "Mathematics.html" },
+                    { name: "Engineering Drawing", file: "Engineering_Drawing.html" },
+                    { name: "Thermodynamics", file: "Thermodynamics.html" }
+                ],
+                "2": [
+                    { name: "Phase Transformations", file: "Phase_Transformations.html" },
+                    { name: "Mechanical Behavior of Materials", file: "Mechanical_Behavior_of_Materials.html" },
+                    { name: "Structure of Materials", file: "Structure_of_Materials.html" },
+                    { name: "Extractive Metallurgy", file: "Extractive_Metallurgy.html" },
+                    { name: "Material Characterization Techniques", file: "Material_Characterization_Techniques.html" }
+                ],
+                "3": [
+                    { name: "Polymer Science", file: "Polymer_Science.html" },
+                    { name: "Ceramic Engineering", file: "Ceramic_Engineering.html" },
+                    { name: "Composite Materials", file: "Composite_Materials.html" },
+                    { name: "Corrosion Engineering", file: "Corrosion_Engineering.html" },
+                    { name: "Failure Analysis", file: "Failure_Analysis.html" }
+                ],
+                "4": [
+                    { name: "Nanomaterials", file: "Nanomaterials.html" },
+                    { name: "Surface Engineering", file: "Surface_Engineering.html" },
+                    { name: "Welding Metallurgy", file: "Welding_Metallurgy.html" },
+                    { name: "Materials for Aerospace", file: "Materials_for_Aerospace.html" },
+                    { name: "Materials Selection", file: "Materials_Selection.html" }
+                ]
+            },
+            "MECHA": {
+                "1": [
+                    { name: "Engineering Mathematics", file: "Engineering_Mathematics.html" },
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Mechanical Engineering Drawing", file: "Mechanical_Engineering_Drawing.html" },
+                    { name: "Basic Electrical Engineering", file: "Basic_Electrical_Engineering.html" },
+                    { name: "Basic Electronics Engineering", file: "Basic_Electronics_Engineering.html" }
+                ],
+                "2": [
+                    { name: "Mechanics of Materials", file: "Mechanics_of_Materials.html" },
+                    { name: "Kinematics and Dynamics of Machines", file: "Kinematics_and_Dynamics_of_Machines.html" },
+                    { name: "Fluid Mechanics", file: "Fluid_Mechanics.html" },
+                    { name: "Digital Electronics", file: "Digital_Electronics.html" },
+                    { name: "Microprocessors", file: "Microprocessors.html" }
+                ],
+                "3": [
+                    { name: "Control Systems", file: "Control_Systems.html" },
+                    { name: "Mechatronics System Design", file: "Mechatronics_System_Design.html" },
+                    { name: "Robotics", file: "Robotics.html" },
+                    { name: "Sensors and Actuators", file: "Sensors_and_Actuators.html" },
+                    { name: "Embedded Systems", file: "Embedded_Systems.html" }
+                ],
+                "4": [
+                    { name: "Industrial Automation", file: "Industrial_Automation.html" },
+                    { name: "CAD/CAM", file: "CAD-CAM.html" },
+                    { name: "Artificial Intelligence", file: "Artificial_Intelligence.html" },
+                    { name: "MEMS", file: "MEMS.html" },
+                    { name: "Virtual Instrumentation", file: "Virtual_Instrumentation.html" }
+                ]
+            },
+            "META": {
+                "1": [
+                    { name: "Mathematics", file: "Mathematics.html" },
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Chemistry", file: "Chemistry.html" },
+                    { name: "Engineering Mechanics", file: "Engineering_Mechanics.html" },
+                    { name: "Thermodynamics", file: "Thermodynamics.html" }
+                ],
+                "2": [
+                    { name: "Physical Metallurgy", file: "Physical_Metallurgy.html" },
+                    { name: "Metallurgical Thermodynamics", file: "Metallurgical_Thermodynamics.html" },
+                    { name: "Fluid Flow", file: "Fluid_Flow.html" },
+                    { name: "Heat Transfer", file: "Heat_Transfer.html" },
+                    { name: "Mechanical Metallurgy", file: "Mechanical_Metallurgy.html" }
+                ],
+                "3": [
+                    { name: "Extractive Metallurgy", file: "Extractive_Metallurgy.html" },
+                    { name: "Iron and Steel Making", file: "Iron_and_Steel_Making.html" },
+                    { name: "Non-Ferrous Metallurgy", file: "Non-Ferrous_Metallurgy.html" },
+                    { name: "Corrosion Engineering", file: "Corrosion_Engineering.html" },
+                    { name: "Powder Metallurgy", file: "Powder_Metallurgy.html" }
+                ],
+                "4": [
+                    { name: "Foundry Technology", file: "Foundry_Technology.html" },
+                    { name: "Welding Technology", file: "Welding_Technology.html" },
+                    { name: "Material Testing and Characterization", file: "Material_Testing_and_Characterization.html" },
+                    { name: "Nano-materials", file: "Nano-materials.html" },
+                    { name: "Advanced Casting", file: "Advanced_Casting.html" }
+                ]
+            },
+            "PE": {
+                "1": [
+                    { name: "Geology", file: "Geology.html" },
+                    { name: "Chemistry", file: "Chemistry.html" },
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Engineering Mathematics", file: "Engineering_Mathematics.html" },
+                    { name: "Computer Programming", file: "Computer_Programming.html" }
+                ],
+                "2": [
+                    { name: "Fluid Mechanics", file: "Fluid_Mechanics.html" },
+                    { name: "Petroleum Geology", file: "Petroleum_Geology.html" },
+                    { name: "Reservoir Engineering", file: "Reservoir_Engineering.html" },
+                    { name: "Drilling Engineering", file: "Drilling_Engineering.html" },
+                    { name: "Well Logging", file: "Well_Logging.html" }
+                ],
+                "3": [
+                    { name: "Petroleum Production Operations", file: "Petroleum_Production_Operations.html" },
+                    { name: "Reservoir Simulation", file: "Reservoir_Simulation.html" },
+                    { name: "Enhanced Oil Recovery", file: "Enhanced_Oil_Recovery.html" },
+                    { name: "Natural Gas Engineering", file: "Natural_Gas_Engineering.html" },
+                    { name: "Petroleum Refining and Petrochemicals", file: "Petroleum_Refining_and_Petrochemicals.html" }
+                ],
+                "4": [
+                    { name: "Offshore Engineering", file: "Offshore_Engineering.html" },
+                    { name: "Petroleum Economics", file: "Petroleum_Economics.html" },
+                    { name: "Health, Safety & Environment", file: "Health_Safety_and_Environment.html" },
+                    { name: "Pipeline Engineering", file: "Pipeline_Engineering.html" },
+                    { name: "Project Management", file: "Project_Management.html" }
+                ]
+            },
+            "RAI": {
+                "1": [
+                    { name: "Calculus", file: "Calculus.html" },
+                    { name: "Linear Algebra", file: "Linear_Algebra.html" },
+                    { name: "Programming with C", file: "Programming_with_C.html" },
+                    { name: "Introduction to Data Science", file: "Introduction_to_Data_Science.html" },
+                    { name: "Electrical and Electronics Engineering", file: "Electrical_and_Electronics_Engineering.html" }
+                ],
+                "2": [
+                    { name: "Data Structures", file: "Data_Structures.html" },
+                    { name: "Algorithms", file: "Algorithms.html" },
+                    { name: "Computer Organization", file: "Computer_Organization.html" },
+                    { name: "Machine Learning", file: "Machine_Learning.html" },
+                    { name: "Robotics: Kinematics and Dynamics", file: "Robotics_Kinematics_and_Dynamics.html" }
+                ],
+                "3": [
+                    { name: "Artificial Intelligence", file: "Artificial_Intelligence.html" },
+                    { name: "Control Systems", file: "Control_Systems.html" },
+                    { name: "Image Processing and Computer Vision", file: "Image_Processing_and_Computer_Vision.html" },
+                    { name: "Embedded Systems for Robotics", file: "Embedded_Systems_for_Robotics.html" },
+                    { name: "Sensor Technology", file: "Sensor_Technology.html" }
+                ],
+                "4": [
+                    { name: "Robotics and AI Applications", file: "Robotics_and_AI_Applications.html" },
+                    { name: "Deep Learning", file: "Deep_Learning.html" },
+                    { name: "Reinforcement Learning", file: "Reinforcement_Learning.html" },
+                    { name: "Robot Operating System (ROS)", file: "Robot_Operating_System_ROS.html" },
+                    { name: "Human-Robot Interaction", file: "Human-Robot_Interaction.html" }
+                ]
+            },
+            "SE": {
+                "1": [
+                    { name: "Mathematics I", file: "Mathematics_I.html" },
+                    { name: "Physics", file: "Physics.html" },
+                    { name: "Computer Programming", file: "Computer_Programming.html" },
+                    { name: "Engineering Graphics", file: "Engineering_Graphics.html" },
+                    { name: "Basic Electrical Engineering", file: "Basic_Electrical_Engineering.html" }
+                ],
+                "2": [
+                    { name: "Data Structures and Algorithms", file: "Data_Structures_and_Algorithms.html" },
+                    { name: "Object-Oriented Programming", file: "Object-Oriented_Programming.html" },
+                    { name: "Software Requirements Engineering", file: "Software_Requirements_Engineering.html" },
+                    { name: "Database Management Systems", file: "Database_Management_Systems.html" },
+                    { name: "Web Technologies", file: "Web_Technologies.html" }
+                ],
+                "3": [
+                    { name: "Software Design and Architecture", file: "Software_Design_and_Architecture.html" },
+                    { name: "Operating Systems", file: "Operating_Systems.html" },
+                    { name: "Software Quality Assurance and Testing", file: "Software_Quality_Assurance_and_Testing.html" },
+                    { name: "Agile Methodologies", file: "Agile_Methodologies.html" },
+                    { name: "Cloud Computing", file: "Cloud_Computing.html" }
+                ],
+                "4": [
+                    { name: "Software Project Management", file: "Software_Project_Management.html" },
+                    { name: "DevOps", file: "DevOps.html" },
+                    { name: "Cyber Security", file: "Cyber_Security.html" },
+                    { name: "Mobile Application Development", file: "Mobile_Application_Development.html" },
+                    { name: "System Integration", file: "System_Integration.html" }
+                ]
+            }
+        };
+        const disciplineSelect = document.getElementById('discipline-select');
+        const yearSelect = document.getElementById('year-select');
+        const showSubjectsBtn = document.getElementById('show-subjects-btn');
+        const subjectsDisplay = document.getElementById('subjects-display');
+        const welcomeMessageElement = document.getElementById('welcome-message');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const userName = localStorage.getItem('userName');
+            if (userName) {
+                const displayName = userName.split('@')[0];
+                welcomeMessageElement.textContent = `Welcome, ${displayName}! 🎓`;
+            } else {
+                welcomeMessageElement.textContent = `Welcome, Engineer! 🎓`;
+            }
+        });
+        
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('userName');
+            window.location.href = 'index.html';
+        });
+        showSubjectsBtn.addEventListener('click', () => {
+            const discipline = disciplineSelect.value;
+            const year = yearSelect.value;
+
+            if (!discipline || !year) {
+                subjectsDisplay.innerHTML = `<p class="text-danger">Please select both a discipline and a year.</p>`;
+                return;
+            }
+            const selectedSubjects = subjectsData[discipline] ? subjectsData[discipline][year] : null;
+            if (selectedSubjects) {
+                let htmlContent = `<h2 class="mt-4">Your ${year} Year Subjects for ${discipline}</h2><ul>`;
+                selectedSubjects.forEach(subject => {
+                    htmlContent += `<li><a href="${subject.file}" class="subject-link">${subject.name}</a></li>`;
+                });
+                htmlContent += `</ul>`;
+                subjectsDisplay.innerHTML = htmlContent;
+            } else {
+                subjectsDisplay.innerHTML = `<p class="text-danger">No subjects found for the selected combination.</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

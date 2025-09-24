@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artificial Intelligence Notes</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f1de;
+            color: #333;
+        }
+        .book-container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            color: #556b2f;
+            border-bottom: 2px solid #556b2f;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+        }
+        h2 {
+            font-size: 1.8em;
+        }
+        h3 {
+            font-size: 1.4em;
+            color: #8b4513;
+            border-bottom: 1px dashed #d2b48c;
+        }
+        p, ul, ol {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        strong {
+            color: #8b4513;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 40px;
+            gap: 15px;
+        }
+        .nav-button {
+            padding: 10px 20px;
+            background-color: #556b2f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Palatino Linotype', serif;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .nav-button:hover {
+            background-color: #8b4513;
+        }
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .question {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        #submit-test-button {
+            background-color: #556b2f;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #submit-test-button:hover {
+            background-color: #8b4513;
+        }
+        #result-container {
+            margin-top: 20px;
+            font-size: 1.5em;
+            text-align: center;
+            font-weight: bold;
+            color: #556b2f;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="notes-container" class="book-container">
+        <!-- Content will be dynamically loaded here by JavaScript -->
+    </div>
+
+    <script>
+        const notesContainer = document.getElementById('notes-container');
+        
+        const page1Content = `
+            <h1>Artificial Intelligence (AI)</h1>
+            <p><strong>Artificial Intelligence (AI)</strong> is the science and engineering of making intelligent machines, especially intelligent computer programs. It is related to the similar task of using computers to understand human intelligence, but AI does not have to confine itself to methods that are biologically observable.</p>
+            
+            <h2>1. Core Concepts of AI</h2>
+            <p>AI can be broadly classified into different categories based on its capabilities.</p>
+            <h3>Weak AI vs. Strong AI</h3>
+            <ul>
+                <li><strong>Weak AI (Narrow AI):</strong> AI that is focused on a specific task. Examples include virtual personal assistants like Siri and Alexa, or a recommendation engine on a streaming service. Most modern AI is Weak AI.</li>
+                <li><strong>Strong AI (General AI):</strong> AI with human-level cognitive abilities that can solve a wide range of problems. This type of AI does not yet exist.</li>
+            </ul>
+
+            <h2>2. Applications of AI</h2>
+            <p>AI is integrated into many aspects of our daily lives, from simple tasks to complex scientific research.</p>
+            <ul>
+                <li><strong>Natural Language Processing (NLP):</strong> The ability of a computer program to understand human language as it is spoken and written. This is used in chatbots and translation software.</li>
+                <li><strong>Computer Vision:</strong> The field that enables computers to "see" and interpret digital images and videos. This is used in self-driving cars and facial recognition technology.</li>
+                <li><strong>Expert Systems:</strong> Computer systems that emulate the decision-making ability of a human expert. They are used in fields like medical diagnosis and financial analysis.</li>
+            </ul>
+
+            <div class="button-container">
+                <button id="next-page-button" class="nav-button">Next Page &gt;</button>
+                <button id="start-test-button" class="nav-button">Start Test</button>
+            </div>
+        `;
+
+        const page2Content = `
+            <h1>More on AI</h1>
+            <h2>3. The AI Development Process</h2>
+            <p>Developing an AI system often involves several key steps to ensure its effectiveness and reliability.</p>
+            <h3>Problem Formulation</h3>
+            <p>This is the first and most critical step, where the specific problem to be solved is clearly defined. This includes identifying the goals, constraints, and data requirements for the AI system.</p>
+            
+            <h3>Data Collection and Preparation</h3>
+            <p>A large, high-quality dataset is essential for training most AI models. The data is collected, cleaned, and organized to be in a suitable format for the chosen algorithm.</p>
+            
+            <h2>4. AI vs. Related Fields</h2>
+            <ul>
+                <li><strong>AI vs. Machine Learning (ML):</strong> AI is a broad field, while ML is a subset of AI that focuses on algorithms that learn from data. All ML is AI, but not all AI is ML.</li>
+                <li><strong>AI vs. Deep Learning (DL):</strong> DL is a subset of ML that uses neural networks with multiple layers. It is a powerful technique for solving complex problems.</li>
+            </ul>
+            <div class="button-container">
+                <button id="next-page-button" class="nav-button hidden">Next Page &gt;</button>
+                <button id="start-test-button" class="nav-button">Start Test</button>
+            </div>
+        `;
+
+        const testContent = `
+            <h1>Artificial Intelligence Test</h1>
+            <p>Choose the best answer for each of the following 10 questions.</p>
+            <form id="quiz-form">
+                <div class="question">
+                    <p>1. What is the primary goal of Artificial Intelligence?</p>
+                    <label><input type="radio" name="q1" value="A"> A. To make robots</label>
+                    <label><input type="radio" name="q1" value="B"> B. To make intelligent machines</label>
+                    <label><input type="radio" name="q1" value="C"> C. To store large amounts of data</label>
+                    <label><input type="radio" name="q1" value="D"> D. To write computer programs</label>
+                </div>
+                <div class="question">
+                    <p>2. Which of the following is an example of Weak AI?</p>
+                    <label><input type="radio" name="q2" value="A"> A. A self-aware robot</label>
+                    <label><input type="radio" name="q2" value="B"> B. A chatbot for customer service</label>
+                    <label><input type="radio" name="q2" value="C"> C. An AI that can reason like a human</label>
+                    <label><input type="radio" name="q2" value="D"> D. A general-purpose AI</label>
+                </div>
+                <div class="question">
+                    <p>3. The field that enables computers to understand human language is called:</p>
+                    <label><input type="radio" name="q3" value="A"> A. Computer Vision</label>
+                    <label><input type="radio" name="q3" value="B"> B. Robotics</label>
+                    <label><input type="radio" name="q3" value="C"> C. Natural Language Processing (NLP)</label>
+                    <label><input type="radio" name="q3" value="D"> D. Machine Learning</label>
+                </div>
+                <div class="question">
+                    <p>4. Which type of AI does not yet exist?</p>
+                    <label><input type="radio" name="q4" value="A"> A. Weak AI</label>
+                    <label><input type="radio" name="q4" value="B"> B. Strong AI</label>
+                    <label><input type="radio" name="q4" value="C"> C. Narrow AI</label>
+                    <label><input type="radio" name="q4" value="D"> D. Both A and C</label>
+                </div>
+                <div class="question">
+                    <p>5. The field of AI that allows computers to interpret digital images is:</p>
+                    <label><input type="radio" name="q5" value="A"> A. Computer Vision</label>
+                    <label><input type="radio" name="q5" value="B"> B. Expert Systems</label>
+                    <label><input type="radio" name="q5" value="C"> C. Reinforcement Learning</label>
+                    <label><input type="radio" name="q5" value="D"> D. Data Mining</label>
+                </div>
+                <div class="question">
+                    <p>6. What is the relationship between AI and Machine Learning?</p>
+                    <label><input type="radio" name="q6" value="A"> A. They are the same thing</label>
+                    <label><input type="radio" name="q6" value="B"> B. AI is a subset of ML</label>
+                    <label><input type="radio" name="q6" value="C"> C. ML is a subset of AI</label>
+                    <label><input type="radio" name="q6" value="D"> D. They are unrelated</label>
+                </div>
+                <div class="question">
+                    <p>7. Which of these is a key step in developing an AI system?</p>
+                    <label><input type="radio" name="q7" value="A"> A. Data Collection</label>
+                    <label><input type="radio" name="q7" value="B"> B. Problem Formulation</label>
+                    <label><input type="radio" name="q7" value="C"> C. Both A and B</label>
+                    <label><input type="radio" name="q7" value="D"> D. None of the above</label>
+                </div>
+                <div class="question">
+                    <p>8. What type of system emulates the decision-making of a human expert?</p>
+                    <label><input type="radio" name="q8" value="A"> A. A Neural Network</label>
+                    <label><input type="radio" name="q8" value="B"> B. A Deep Learning model</label>
+                    <label><input type="radio" name="q8" value="C"> C. An Expert System</label>
+                    <label><input type="radio" name="q8" value="D"> D. A Regression Model</label>
+                </div>
+                <div class="question">
+                    <p>9. What is a key characteristic of Deep Learning?</p>
+                    <label><input type="radio" name="q9" value="A"> A. It uses labeled data</label>
+                    <label><input type="radio" name="q9" value="B"> B. It is a subset of ML</label>
+                    <label><input type="radio" name="q9" value="C"> C. It uses multi-layered neural networks</label>
+                    <label><input type="radio" name="q9" value="D"> D. Both B and C</label>
+                </div>
+                <div class="question">
+                    <p>10. What kind of AI is a self-driving car?</p>
+                    <label><input type="radio" name="q10" value="A"> A. Strong AI</label>
+                    <label><input type="radio" name="q10" value="B"> B. General AI</label>
+                    <label><input type="radio" name="q10" value="C"> C. Weak AI</label>
+                    <label><input type="radio" name="q10" value="D"> D. Unsupervised AI</label>
+                </div>
+                <button type="button" id="submit-test-button">Submit Test</button>
+            </form>
+            <div id="result-container" class="hidden"></div>
+        `;
+        
+        // Define correct answers
+        const correctAnswers = {
+            q1: 'B', q2: 'B', q3: 'C', q4: 'B', q5: 'A',
+            q6: 'C', q7: 'C', q8: 'C', q9: 'D', q10: 'C',
+        };
+
+        function loadPage(page) {
+            notesContainer.innerHTML = page;
+            setupEventListeners();
+        }
+        
+        function setupEventListeners() {
+            const nextPageButton = document.getElementById('next-page-button');
+            const startTestButton = document.getElementById('start-test-button');
+            const submitTestButton = document.getElementById('submit-test-button');
+
+            if (nextPageButton) {
+                nextPageButton.addEventListener('click', () => {
+                    loadPage(page2Content);
+                    const newNextPageButton = document.getElementById('next-page-button');
+                    if (newNextPageButton) {
+                         newNextPageButton.classList.add('hidden');
+                    }
+                });
+            }
+
+            if (startTestButton) {
+                startTestButton.addEventListener('click', () => {
+                    loadPage(testContent);
+                });
+            }
+
+            if (submitTestButton) {
+                submitTestButton.addEventListener('click', () => {
+                    const form = document.getElementById('quiz-form');
+                    const resultContainer = document.getElementById('result-container');
+                    let score = 0;
+                    for (let i = 1; i <= 10; i++) {
+                        const questionName = `q${i}`;
+                        const selectedOption = form.querySelector(`input[name="${questionName}"]:checked`);
+                        if (selectedOption && selectedOption.value === correctAnswers[questionName]) {
+                            score++;
+                        }
+                    }
+                    resultContainer.textContent = `You scored ${score} out of 10!`;
+                    resultContainer.classList.remove('hidden');
+                });
+            }
+        }
+
+        // Load the initial content on page load
+        window.onload = () => {
+            loadPage(page1Content);
+        };
+    </script>
+
+</body>
+</html>

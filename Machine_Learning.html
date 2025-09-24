@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Notes</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f1de;
+            color: #333;
+        }
+        .book-container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            color: #556b2f;
+            border-bottom: 2px solid #556b2f;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+        }
+        h2 {
+            font-size: 1.8em;
+        }
+        h3 {
+            font-size: 1.4em;
+            color: #8b4513;
+            border-bottom: 1px dashed #d2b48c;
+        }
+        p, ul, ol {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        strong {
+            color: #8b4513;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 40px;
+            gap: 15px;
+        }
+        .nav-button {
+            padding: 10px 20px;
+            background-color: #556b2f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Palatino Linotype', serif;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .nav-button:hover {
+            background-color: #8b4513;
+        }
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .question {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        #submit-test-button {
+            background-color: #556b2f;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #submit-test-button:hover {
+            background-color: #8b4513;
+        }
+        #result-container {
+            margin-top: 20px;
+            font-size: 1.5em;
+            text-align: center;
+            font-weight: bold;
+            color: #556b2f;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="notes-container" class="book-container">
+        <!-- Content will be dynamically loaded here by JavaScript -->
+    </div>
+
+    <script>
+        const notesContainer = document.getElementById('notes-container');
+        
+        const page1Content = `
+            <h1>Machine Learning (ML)</h1>
+            <p><strong>Machine Learning (ML)</strong> is a subfield of artificial intelligence (AI) that focuses on the study of computer algorithms that improve automatically through experience. It enables computers to learn from data without being explicitly programmed.</p>
+            
+            <h2>1. Types of Machine Learning</h2>
+            <p>ML models are categorized based on how they learn from data.</p>
+            <h3>Supervised Learning</h3>
+            <p>In supervised learning, the model is trained on a labeled dataset, meaning the input data is paired with the correct output. The goal is to learn a mapping from inputs to outputs to make predictions on new, unseen data.</p>
+            <ul>
+                <li><strong>Classification:</strong> Predicts a categorical output (e.g., spam or not spam).</li>
+                <li><strong>Regression:</strong> Predicts a continuous numerical output (e.g., house prices).</li>
+            </ul>
+
+            <h3>Unsupervised Learning</h3>
+            <p>This type of learning involves training a model on an unlabeled dataset. The model must find hidden patterns and relationships in the data on its own. There is no "correct" answer to guide the learning process.</p>
+            <ul>
+                <li><strong>Clustering:</strong> Groups similar data points together.</li>
+                <li><strong>Association:</strong> Finds rules that describe large portions of the data (e.g., "people who buy A also tend to buy B").</li>
+            </ul>
+            
+            <h3>Reinforcement Learning</h3>
+            <p>A model learns to make decisions by performing actions in an environment to achieve a goal. It receives a reward for correct actions and a penalty for incorrect ones, teaching it to choose the best actions over time.</p>
+
+            <div class="button-container">
+                <button id="next-page-button" class="nav-button">Next Page &gt;</button>
+                <button id="start-test-button" class="nav-button">Start Test</button>
+            </div>
+        `;
+
+        const page2Content = `
+            <h1>More on Machine Learning</h1>
+            <h2>2. The ML Workflow</h2>
+            <p>A typical machine learning project follows a series of steps to build a successful model.</p>
+            <h3>Data Preprocessing</h3>
+            <p>This is the crucial first step where raw data is cleaned and transformed into a format that is suitable for the model. It includes handling missing values, scaling data, and feature engineering.</p>
+            
+            <h3>Model Training and Evaluation</h3>
+            <p>After preprocessing, the data is split into training and testing sets. The model learns from the training data, and its performance is measured on the testing data to check for accuracy.</p>
+            
+            <h2>3. Common ML Algorithms</h2>
+            <ul>
+                <li><strong>Linear Regression:</strong> A supervised learning algorithm used for regression tasks. It finds a linear relationship between input features and a numerical output.</li>
+                <li><strong>Decision Trees:</strong> A versatile supervised learning algorithm used for both classification and regression. It splits data based on features to create a tree-like model of decisions.</li>
+                <li><strong>K-Means Clustering:</strong> A popular unsupervised learning algorithm for clustering. It partitions data into K distinct clusters based on their similarity.</li>
+                <li><strong>Neural Networks:</strong> Inspired by the human brain, these are powerful algorithms for complex tasks like image and speech recognition. They are composed of layers of interconnected nodes.</li>
+            </ul>
+
+            <div class="button-container">
+                <button id="next-page-button" class="nav-button hidden">Next Page &gt;</button>
+                <button id="start-test-button" class="nav-button">Start Test</button>
+            </div>
+        `;
+
+        const testContent = `
+            <h1>Machine Learning Test</h1>
+            <p>Choose the best answer for each of the following 10 questions.</p>
+            <form id="quiz-form">
+                <div class="question">
+                    <p>1. Which type of machine learning uses labeled data for training?</p>
+                    <label><input type="radio" name="q1" value="A"> A. Unsupervised Learning</label>
+                    <label><input type="radio" name="q1" value="B"> B. Reinforcement Learning</label>
+                    <label><input type="radio" name="q1" value="C"> C. Supervised Learning</label>
+                    <label><input type="radio" name="q1" value="D"> D. Clustering</label>
+                </div>
+                <div class="question">
+                    <p>2. The process of grouping similar data points is called:</p>
+                    <label><input type="radio" name="q2" value="A"> A. Classification</label>
+                    <label><input type="radio" name="q2" value="B"> B. Regression</label>
+                    <label><input type="radio" name="q2" value="C"> C. Clustering</label>
+                    <label><input type="radio" name="q2" value="D"> D. Reinforcement</label>
+                </div>
+                <div class="question">
+                    <p>3. Which algorithm is used for predicting a continuous numerical output?</p>
+                    <label><input type="radio" name="q3" value="A"> A. Linear Regression</label>
+                    <label><input type="radio" name="q3" value="B"> B. K-Means</label>
+                    <label><input type="radio" name="q3" value="C"> C. Decision Tree (for classification)</label>
+                    <label><input type="radio" name="q3" value="D"> D. All of the above</label>
+                </div>
+                <div class="question">
+                    <p>4. What is the goal of a reinforcement learning model?</p>
+                    <label><input type="radio" name="q4" value="A"> A. To find hidden patterns in data</label>
+                    <label><input type="radio" name="q4" value="B"> B. To make predictions on new data</label>
+                    <label><input type="radio" name="q4" value="C"> C. To learn to make decisions to achieve a goal</label>
+                    <label><input type="radio" name="q4" value="D"> D. To group similar data points</label>
+                </div>
+                <div class="question">
+                    <p>5. The process of cleaning and transforming raw data is known as:</p>
+                    <label><input type="radio" name="q5" value="A"> A. Model Training</label>
+                    <label><input type="radio" name="q5" value="B"> B. Data Preprocessing</label>
+                    <label><input type="radio" name="q5" value="C"> C. Model Evaluation</label>
+                    <label><input type="radio" name="q5" value="D"> D. Feature Extraction</label>
+                </div>
+                <div class="question">
+                    <p>6. A neural network is inspired by which of the following?</p>
+                    <label><input type="radio" name="q6" value="A"> A. The human brain</label>
+                    <label><input type="radio" name="q6" value="B"> B. Decision trees</label>
+                    <label><input type="radio" name="q6" value="C"> C. Statistical models</label>
+                    <label><input type="radio" name="q6" value="D"> D. Linear regression</label>
+                </div>
+                <div class="question">
+                    <p>7. If you wanted to predict if an email is "spam" or "not spam," you would use a:</p>
+                    <label><input type="radio" name="q7" value="A"> A. Regression algorithm</label>
+                    <label><input type="radio" name="q7" value="B"> B. Clustering algorithm</label>
+                    <label><input type="radio" name="q7" value="C"> C. Classification algorithm</label>
+                    <label><input type="radio" name="q7" value="D"> D. Association algorithm</label>
+                </div>
+                <div class="question">
+                    <p>8. Which of these is a key step in the ML workflow?</p>
+                    <label><input type="radio" name="q8" value="A"> A. Data Preprocessing</label>
+                    <label><input type="radio" name="q8" value="B"> B. Model Training</label>
+                    <label><input type="radio" name="q8" value="C"> C. Model Evaluation</label>
+                    <label><input type="radio" name="q8" value="D"> D. All of the above</label>
+                </div>
+                <div class="question">
+                    <p>9. What is the term for a model learning from an unlabeled dataset?</p>
+                    <label><input type="radio" name="q9" value="A"> A. Supervised Learning</label>
+                    <label><input type="radio" name="q9" value="B"> B. Unsupervised Learning</label>
+                    <label><input type="radio" name="q9" value="C"> C. Reinforcement Learning</label>
+                    <label><input type="radio" name="q9" value="D"> D. Semi-supervised learning</label>
+                </div>
+                <div class="question">
+                    <p>10. The algorithm that partitions data into K clusters is:</p>
+                    <label><input type="radio" name="q10" value="A"> A. Linear Regression</label>
+                    <label><input type="radio" name="q10" value="B"> B. Decision Tree</label>
+                    <label><input type="radio" name="q10" value="C"> C. K-Means Clustering</label>
+                    <label><input type="radio" name="q10" value="D"> D. Neural Network</label>
+                </div>
+                <button type="button" id="submit-test-button">Submit Test</button>
+            </form>
+            <div id="result-container" class="hidden"></div>
+        `;
+        
+        // Define correct answers
+        const correctAnswers = {
+            q1: 'C', q2: 'C', q3: 'A', q4: 'C', q5: 'B',
+            q6: 'A', q7: 'C', q8: 'D', q9: 'B', q10: 'C',
+        };
+
+        function loadPage(page) {
+            notesContainer.innerHTML = page;
+            setupEventListeners();
+        }
+        
+        function setupEventListeners() {
+            const nextPageButton = document.getElementById('next-page-button');
+            const startTestButton = document.getElementById('start-test-button');
+            const submitTestButton = document.getElementById('submit-test-button');
+
+            if (nextPageButton) {
+                nextPageButton.addEventListener('click', () => {
+                    loadPage(page2Content);
+                    const newNextPageButton = document.getElementById('next-page-button');
+                    if (newNextPageButton) {
+                         newNextPageButton.classList.add('hidden');
+                    }
+                });
+            }
+
+            if (startTestButton) {
+                startTestButton.addEventListener('click', () => {
+                    loadPage(testContent);
+                });
+            }
+
+            if (submitTestButton) {
+                submitTestButton.addEventListener('click', () => {
+                    const form = document.getElementById('quiz-form');
+                    const resultContainer = document.getElementById('result-container');
+                    let score = 0;
+                    for (let i = 1; i <= 10; i++) {
+                        const questionName = `q${i}`;
+                        const selectedOption = form.querySelector(`input[name="${questionName}"]:checked`);
+                        if (selectedOption && selectedOption.value === correctAnswers[questionName]) {
+                            score++;
+                        }
+                    }
+                    resultContainer.textContent = `You scored ${score} out of 10!`;
+                    resultContainer.classList.remove('hidden');
+                });
+            }
+        }
+
+        // Load the initial content on page load
+        window.onload = () => {
+            loadPage(page1Content);
+        };
+    </script>
+
+</body>
+</html>

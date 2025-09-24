@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Networks Notes</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f1de;
+            color: #333;
+        }
+        .book-container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease-in-out;
+        }
+        h1, h2, h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            color: #556b2f;
+            border-bottom: 2px solid #556b2f;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+        }
+        h2 {
+            font-size: 1.8em;
+        }
+        h3 {
+            font-size: 1.4em;
+            color: #8b4513;
+            border-bottom: 1px dashed #d2b48c;
+        }
+        p, ul, ol {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        strong {
+            color: #8b4513;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 40px;
+            gap: 15px;
+        }
+        .nav-button {
+            padding: 10px 20px;
+            background-color: #556b2f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Palatino Linotype', serif;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .nav-button:hover {
+            background-color: #8b4513;
+        }
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .question {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        #submit-test-button {
+            background-color: #556b2f;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #submit-test-button:hover {
+            background-color: #8b4513;
+        }
+        .hidden {
+            display: none;
+        }
+        .result-page {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .result-page h2 {
+            font-size: 2.5em;
+            color: #8b4513;
+            border-bottom: none;
+        }
+        .result-page p {
+            font-size: 1.8em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #556b2f;
+        }
+        .result-page .feedback {
+            font-size: 2em;
+            font-weight: bold;
+            color: #556b2f;
+        }
+        .try-again-button {
+            padding: 15px 30px;
+            background-color: #556b2f;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 30px;
+        }
+        .try-again-button:hover {
+            background-color: #8b4513;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="notes-container" class="book-container">
+        <!-- Content will be dynamically loaded here by JavaScript -->
+    </div>
+
+    <script>
+        const notesContainer = document.getElementById('notes-container');
+        
+        const page1Content = `
+            <h1>Computer Networks</h1>
+            <p>A <strong>Computer Network</strong> is a system that connects two or more devices together, allowing them to share resources and communicate with each other. Networks can range from small local networks to the vast global network known as the Internet.</p>
+            
+            <h2>1. Types of Networks</h2>
+            <p>Networks are classified based on their size and coverage area.</p>
+            <h3>Local Area Network (LAN)</h3>
+            <p>A LAN connects devices within a limited area, such as a home, school, or office building. It is typically a private network managed by an organization.</p>
+            <h3>Wide Area Network (WAN)</h3>
+            <p>A WAN spans a large geographical area, often connecting multiple LANs. The Internet is the most well-known example of a WAN.</p>
+            <h3>Metropolitan Area Network (MAN)</h3>
+            <p>A MAN covers a city or a large campus. It is larger than a LAN but smaller than a WAN.</p>
+
+            <h2>2. Network Topologies</h2>
+            <p>Network topology refers to the physical or logical arrangement of the connected devices in a network.</p>
+            <ul>
+                <li><strong>Bus Topology:</strong> All devices are connected to a single central cable.</li>
+                <li><strong>Star Topology:</strong> All devices are connected to a central hub or switch. This is the most common topology today.</li>
+                <li><strong>Ring Topology:</strong> Devices are connected in a closed loop, with data traveling in one direction.</li>
+                <li><strong>Mesh Topology:</strong> Every device is interconnected with every other device.</li>
+            </ul>
+
+            <div class="button-container">
+                <button id="next-page-button" class="nav-button">Next Page &gt;</button>
+                <button id="start-test-button" class="nav-button">Start Test</button>
+            </div>
+        `;
+
+        const page2Content = `
+            <h1>More on Computer Networks</h1>
+            <h2>3. The OSI Model</h2>
+            <p>The <strong>OSI (Open Systems Interconnection) Model</strong> is a conceptual framework that standardizes the functions of a telecommunication or computing system into seven distinct layers.</p>
+            <h3>The Seven Layers</h3>
+            <ol>
+                <li><strong>Physical Layer:</strong> Deals with the physical connection, like cables and wireless signals.</li>
+                <li><strong>Data Link Layer:</strong> Provides node-to-node data transfer.</li>
+                <li><strong>Network Layer:</strong> Manages addressing and routing of data packets.</li>
+                <li><strong>Transport Layer:</strong> Provides reliable data delivery, segmenting data for transport.</li>
+                <li><strong>Session Layer:</strong> Manages sessions between applications.</li>
+                <li><strong>Presentation Layer:</strong> Translates, encrypts, and compresses data.</li>
+                <li><strong>Application Layer:</strong> The layer that interacts directly with the end-user.</li>
+            </ol>
+            
+            <h2>4. Protocols</h2>
+            <p>A <strong>protocol</strong> is a set of rules that governs data communication. Key protocols include:</p>
+            <ul>
+                <li><strong>TCP/IP:</strong> The foundational protocol suite of the Internet.</li>
+                <li><strong>HTTP/HTTPS:</strong> Protocols for the World Wide Web.</li>
+                <li><strong>FTP:</strong> Protocol for file transfer.</li>
+            </ul>
+
+            <div class="button-container">
+                <button id="next-page-button" class="nav-button hidden">Next Page &gt;</button>
+                <button id="start-test-button" class="nav-button">Start Test</button>
+            </div>
+        `;
+
+        const testContent = `
+            <h1>Computer Networks Test</h1>
+            <p>Choose the best answer for each of the following 10 questions.</p>
+            <form id="quiz-form">
+                <div class="question">
+                    <p>1. Which type of network covers a large geographical area and connects multiple LANs?</p>
+                    <label><input type="radio" name="q1" value="A"> A. LAN</label>
+                    <label><input type="radio" name="q1" value="B"> B. WAN</label>
+                    <label><input type="radio" name="q1" value="C"> C. MAN</label>
+                    <label><input type="radio" name="q1" value="D"> D. PAN</label>
+                </div>
+                <div class="question">
+                    <p>2. In which topology are all devices connected to a central hub?</p>
+                    <label><input type="radio" name="q2" value="A"> A. Bus</label>
+                    <label><input type="radio" name="q2" value="B"> B. Ring</label>
+                    <label><input type="radio" name="q2" value="C"> C. Star</label>
+                    <label><input type="radio" name="q2" value="D"> D. Mesh</label>
+                </div>
+                <div class="question">
+                    <p>3. The OSI model has how many layers?</p>
+                    <label><input type="radio" name="q3" value="A"> A. 5</label>
+                    <label><input type="radio" name="q3" value="B"> B. 6</label>
+                    <label><input type="radio" name="q3" value="C"> C. 7</label>
+                    <label><input type="radio" name="q3" value="D"> D. 8</label>
+                </div>
+                <div class="question">
+                    <p>4. Which layer of the OSI model is responsible for routing data packets?</p>
+                    <label><input type="radio" name="q4" value="A"> A. Transport Layer</label>
+                    <label><input type="radio" name="q4" value="B"> B. Network Layer</label>
+                    <label><input type="radio" name="q4" value="C"> C. Data Link Layer</label>
+                    <label><input type="radio" name="q4" value="D"> D. Physical Layer</label>
+                </div>
+                <div class="question">
+                    <p>5. What is the protocol used for transferring files?</p>
+                    <label><input type="radio" name="q5" value="A"> A. HTTP</label>
+                    <label><input type="radio" name="q5" value="B"> B. TCP/IP</label>
+                    <label><input type="radio" name="q5" value="C"> C. FTP</label>
+                    <label><input type="radio" name="q5" value="D"> D. SMTP</label>
+                </div>
+                <div class="question">
+                    <p>6. Which of these is a small network limited to a single building or home?</p>
+                    <label><input type="radio" name="q6" value="A"> A. WAN</label>
+                    <label><input type="radio" name="q6" value="B"> B. LAN</label>
+                    <label><input type="radio" name="q6" value="C"> C. MAN</label>
+                    <label><input type="radio" name="q6" value="D"> D. The Internet</label>
+                </div>
+                <div class="question">
+                    <p>7. The arrangement of devices in a network is called its:</p>
+                    <label><input type="radio" name="q7" value="A"> A. Protocol</label>
+                    <label><input type="radio" name="q7" value="B"> B. Architecture</label>
+                    <label><input type="radio" name="q7" value="C"> C. Topology</label>
+                    <label><input type="radio" name="q7" value="D"> D. Model</label>
+                </div>
+                <div class="question">
+                    <p>8. Which layer of the OSI model interacts directly with the user's application?</p>
+                    <label><input type="radio" name="q8" value="A"> A. Transport Layer</label>
+                    <label><input type="radio" name="q8" value="B"> B. Session Layer</label>
+                    <label><input type="radio" name="q8" value="C"> C. Physical Layer</label>
+                    <label><input type="radio" name="q8" value="D"> D. Application Layer</label>
+                </div>
+                <div class="question">
+                    <p>9. The Internet is an example of which type of network?</p>
+                    <label><input type="radio" name="q9" value="A"> A. LAN</label>
+                    <label><input type="radio" name="q9" value="B"> B. MAN</label>
+                    <label><input type="radio" name="q9" value="C"> C. WAN</label>
+                    <label><input type="radio" name="q9" value="D"> D. PAN</label>
+                </div>
+                <div class="question">
+                    <p>10. What is a set of rules for data communication called?</p>
+                    <label><input type="radio" name="q10" value="A"> A. A protocol</label>
+                    <label><input type="radio" name="q10" value="B"> B. A topology</label>
+                    <label><input type="radio" name="q10" value="C"> C. A model</label>
+                    <label><input type="radio" name="q10" value="D"> D. A layer</label>
+                </div>
+                <button type="button" id="submit-test-button">Submit Test</button>
+            </form>
+            <div id="result-container" class="hidden"></div>
+        `;
+        
+        // Define correct answers
+        const correctAnswers = {
+            q1: 'B', q2: 'C', q3: 'C', q4: 'B', q5: 'C',
+            q6: 'B', q7: 'C', q8: 'D', q9: 'C', q10: 'A',
+        };
+
+        function loadPage(page) {
+            notesContainer.innerHTML = page;
+            setupEventListeners();
+        }
+
+        function showResultPage(score, percentage) {
+            let feedback = '';
+            if (percentage >= 75) {
+                feedback = 'Excellent';
+            } else if (percentage >= 50) {
+                feedback = 'Good';
+            } else if (percentage >= 25) {
+                feedback = 'Not bad';
+            } else {
+                feedback = 'Bad, try next text';
+            }
+
+            const resultPageContent = `
+                <div class="result-page">
+                    <h2>Test Results</h2>
+                    <p>Your score: ${score} out of 10</p>
+                    <p>Your percentage: ${percentage}%</p>
+                    <p class="feedback">${feedback}</p>
+                    <button id="try-again-button" class="try-again-button">Try Again</button>
+                </div>
+            `;
+            notesContainer.innerHTML = resultPageContent;
+
+            document.getElementById('try-again-button').addEventListener('click', () => {
+                loadPage(testContent);
+            });
+        }
+        
+        function setupEventListeners() {
+            const nextPageButton = document.getElementById('next-page-button');
+            const startTestButton = document.getElementById('start-test-button');
+            const submitTestButton = document.getElementById('submit-test-button');
+
+            if (nextPageButton) {
+                nextPageButton.addEventListener('click', () => {
+                    loadPage(page2Content);
+                    const newNextPageButton = document.getElementById('next-page-button');
+                    if (newNextPageButton) {
+                         newNextPageButton.classList.add('hidden');
+                    }
+                });
+            }
+
+            if (startTestButton) {
+                startTestButton.addEventListener('click', () => {
+                    loadPage(testContent);
+                });
+            }
+
+            if (submitTestButton) {
+                submitTestButton.addEventListener('click', () => {
+                    const form = document.getElementById('quiz-form');
+                    let score = 0;
+                    for (let i = 1; i <= 10; i++) {
+                        const questionName = `q${i}`;
+                        const selectedOption = form.querySelector(`input[name="${questionName}"]:checked`);
+                        if (selectedOption && selectedOption.value === correctAnswers[questionName]) {
+                            score++;
+                        }
+                    }
+                    const percentage = (score / 10) * 100;
+                    showResultPage(score, percentage);
+                });
+            }
+        }
+
+        // Load the initial content on page load
+        window.onload = () => {
+            loadPage(page1Content);
+        };
+    </script>
+
+</body>
+</html>

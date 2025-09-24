@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Login & Sign Up</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background 0.5s ease;
+        }
+
+        .login-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+            transition: all 0.5s ease;
+        }
+
+        .emoji {
+            font-size: 70px;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        h2 {
+            color: #ff6600;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 2px solid #ffa94d;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ff6600;
+            box-shadow: 0 0 8px #ff6600;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 15px;
+            background: #ff6600;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff4500;
+            transform: scale(1.1);
+        }
+        
+        .toggle-text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .toggle-link {
+            color: #ff6600;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .toggle-link:hover {
+            text-decoration: underline;
+        }
+        
+        .hidden-input {
+            display: none;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="emoji" id="emoji">😃</div>
+        <h2 id="form-title">Welcome Back!</h2>
+        <input type="email" placeholder="Enter Email" id="email"><br>
+        <input type="password" placeholder="Enter Password" id="password"><br>
+        <input type="password" placeholder="Confirm Password" id="confirm-password" class="hidden-input"><br>
+        <button id="submit-btn">Login</button>
+        <p id="error-message" class="error-message"></p>
+        <p class="toggle-text">Don't have an account? <a href="#" class="toggle-link" id="toggle-link">Sign Up</a></p>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+    <script>
+        // REPLACE THIS ENTIRE CONFIG OBJECT WITH YOURS FROM THE FIREBASE CONSOLE
+        const firebaseConfig = {
+  apiKey: "AIzaSyD7v0kSnnNwXH9FCtjeeiIvqHgAcikbyxc",
+  authDomain: "login-sign-up-page-2a54f.firebaseapp.com",
+  projectId: "login-sign-up-page-2a54f",
+  storageBucket: "login-sign-up-page-2a54f.firebasestorage.app",
+  messagingSenderId: "82639208964",
+  appId: "1:82639208964:web:a8946fdb9835b5e904eb51",
+  measurementId: "G-HT9N41QYNP"
+};
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // DOM Elements
+        const emojiElement = document.getElementById("emoji");
+        const toggleLink = document.getElementById('toggle-link');
+        const formTitle = document.getElementById('form-title');
+        const submitBtn = document.getElementById('submit-btn');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const errorMessageDiv = document.getElementById('error-message');
+
+        let isLogin = true;
+
+        // Emoji animation
+        const emojis = ["😃", "🎮", "📚", "🌟", "🦸‍♂️", "🦄", "🎉"];
+        let index = 0;
+        setInterval(() => {
+            index = (index + 1) % emojis.length;
+            emojiElement.textContent = emojis[index];
+        }, 1000);
+
+        // Function to display error messages
+        function displayError(message) {
+            errorMessageDiv.textContent = message;
+        }
+
+        // Handle form submission
+        submitBtn.addEventListener('click', () => {
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            displayError(""); // Clear previous errors
+
+            if (isLogin) {
+                // Login User
+                auth.signInWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        console.log("User logged in:", userCredential.user);
+                        // Redirect to the home page on successful login
+                        window.location.href = "home.html";
+                    })
+                    .catch((error) => {
+                        displayError("Login Failed: " + error.message);
+                    });
+            } else {
+                // Sign Up User
+                if (password !== confirmPassword) {
+                    displayError("Passwords do not match! 😩");
+                    return;
+                }
+                auth.createUserWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        console.log("User signed up:", userCredential.user);
+                        // Redirect to the home page on successful signup
+                        window.location.href = "home.html";
+                    })
+                    .catch((error) => {
+                        displayError("Sign Up Failed: " + error.message);
+                    });
+            }
+        });
+
+        // Toggle between Login and Sign Up
+        toggleLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            displayError(""); // Clear any errors
+
+            if (isLogin) {
+                formTitle.textContent = "Join the Fun!";
+                submitBtn.textContent = "Sign Up";
+                confirmPasswordInput.classList.remove('hidden-input');
+                toggleLink.textContent = "Log In";
+                toggleLink.parentElement.firstChild.nodeValue = "Already have an account? ";
+            } else {
+                formTitle.textContent = "Welcome Back!";
+                submitBtn.textContent = "Login";
+                confirmPasswordInput.classList.add('hidden-input');
+                toggleLink.textContent = "Sign Up";
+                toggleLink.parentElement.firstChild.nodeValue = "Don't have an account? ";
+            }
+            
+            isLogin = !isLogin;
+        });
+
+    </script>
+</body>
+</html>

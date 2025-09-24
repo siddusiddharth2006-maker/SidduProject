@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Management Systems Notes</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f1de;
+            color: #333;
+        }
+        .book-container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            color: #556b2f;
+            border-bottom: 2px solid #556b2f;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+        }
+        h2 {
+            font-size: 1.8em;
+        }
+        h3 {
+            font-size: 1.4em;
+            color: #8b4513;
+            border-bottom: 1px dashed #d2b48c;
+        }
+        p, ul, ol {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        strong {
+            color: #8b4513;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 40px;
+            gap: 15px;
+        }
+        .nav-button {
+            padding: 10px 20px;
+            background-color: #556b2f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Palatino Linotype', serif;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .nav-button:hover {
+            background-color: #8b4513;
+        }
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .question {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        #submit-test-button {
+            background-color: #556b2f;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #submit-test-button:hover {
+            background-color: #8b4513;
+        }
+        #result-container {
+            margin-top: 20px;
+            font-size: 1.5em;
+            text-align: center;
+            font-weight: bold;
+            color: #556b2f;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="notes-container" class="book-container">
+        <!-- Content will be dynamically loaded here by JavaScript -->
+    </div>
+
+    <script>
+        const notesContainer = document.getElementById('notes-container');
+        
+        const page1Content = `
+            <h1>Database Management Systems (DBMS)</h1>
+            <p>A <strong>Database Management System (DBMS)</strong> is a software system that allows users to create, define, and maintain a database and provides controlled access to data. It acts as an interface between the database and its end-users, ensuring the data is organized, safe, and easily accessible.</p>
+            
+            <h2>1. Introduction to Databases</h2>
+            <p>A <strong>database</strong> is an organized collection of structured information, or data, typically stored electronically in a computer system. It can be thought of as an electronic filing system.</p>
+            <h3>Components of a DBMS</h3>
+            <ul>
+                <li><strong>Hardware:</strong> The physical devices like computers, storage devices, etc.</li>
+                <li><strong>Software:</strong> The DBMS itself and the operating system.</li>
+                <li><strong>Data:</strong> The collection of facts and figures stored in the database.</li>
+                <li><strong>Users:</strong> People who interact with the database.</li>
+                <li><strong>Procedures:</strong> The rules and instructions for using the database.</li>
+            </ul>
+
+            <h2>2. Database Models</h2>
+            <p>A database model is the logical structure of a database, including the relationships and constraints between the data.</p>
+            <h3>Relational Model</h3>
+            <p>This is the most widely used model today. Data is organized into two-dimensional tables called relations. Each table has rows (records/tuples) and columns (attributes/fields).</p>
+            <ul>
+                <li><strong>Tables (Relations):</strong> Data is stored in tables.</li>
+                <li><strong>Rows (Records):</strong> A single entry in a table.</li>
+                <li><strong>Columns (Attributes):</strong> A specific piece of data in a table.</li>
+                <li><strong>Keys:</strong> Used to uniquely identify a row. A <strong>Primary Key</strong> uniquely identifies each row in a table. A <strong>Foreign Key</strong> establishes a link between tables.</li>
+            </ul>
+
+            <div class="button-container">
+                <button id="next-page-button" class="nav-button">Next Page &gt;</button>
+                <button id="start-test-button" class="nav-button">Start Test</button>
+            </div>
+        `;
+
+        const page2Content = `
+            <h1>More on DBMS</h1>
+            <h2>3. SQL (Structured Query Language)</h2>
+            <p><strong>SQL</strong> is the standard language for managing relational databases. It is used to communicate with a database to perform tasks like creating databases, tables, and views, and inserting, updating, and retrieving data.</p>
+            <h3>Types of SQL Commands</h3>
+            <ul>
+                <li><strong>Data Definition Language (DDL):</strong> Used to define and manage database objects. Examples include <code>CREATE</code>, <code>ALTER</code>, and <code>DROP</code>.</li>
+                <li><strong>Data Manipulation Language (DML):</strong> Used to manipulate data within the database. Examples include <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, and <code>SELECT</code>.</li>
+            </ul>
+
+            <h2>4. Normalization</h2>
+            <p><strong>Normalization</strong> is the process of organizing data in a database to reduce data redundancy and improve data integrity. It involves a series of rules called normal forms.</p>
+            <h3>Normal Forms</h3>
+            <ul>
+                <li><strong>First Normal Form (1NF):</strong> A table is in 1NF if it contains no repeating groups of data and each column holds atomic values.</li>
+                <li><strong>Second Normal Form (2NF):</strong> A table is in 2NF if it is in 1NF and all non-key attributes are fully dependent on the primary key.</li>
+                <li><strong>Third Normal Form (3NF):</strong> A table is in 3NF if it is in 2NF and all non-key attributes are not transitively dependent on the primary key.</li>
+            </ul>
+
+            <div class="button-container">
+                <button id="next-page-button" class="nav-button hidden">Next Page &gt;</button>
+                <button id="start-test-button" class="nav-button">Start Test</button>
+            </div>
+        `;
+
+        const testContent = `
+            <h1>DBMS Test</h1>
+            <p>Choose the best answer for each of the following 10 questions.</p>
+            <form id="quiz-form">
+                <div class="question">
+                    <p>1. What is the standard language for managing relational databases?</p>
+                    <label><input type="radio" name="q1" value="A"> A. XML</label>
+                    <label><input type="radio" name="q1" value="B"> B. HTML</label>
+                    <label><input type="radio" name="q1" value="C"> C. SQL</label>
+                    <label><input type="radio" name="q1" value="D"> D. Java</label>
+                </div>
+                <div class="question">
+                    <p>2. Which key uniquely identifies each row in a table?</p>
+                    <label><input type="radio" name="q2" value="A"> A. Foreign Key</label>
+                    <label><input type="radio" name="q2" value="B"> B. Candidate Key</label>
+                    <label><input type="radio" name="q2" value="C"> C. Primary Key</label>
+                    <label><input type="radio" name="q2" value="D"> D. Super Key</label>
+                </div>
+                <div class="question">
+                    <p>3. The <code>CREATE</code> command is part of which SQL sub-language?</p>
+                    <label><input type="radio" name="q3" value="A"> A. DML</label>
+                    <label><input type="radio" name="q3" value="B"> B. DCL</label>
+                    <label><input type="radio" name="q3" value="C"> C. DDL</label>
+                    <label><input type="radio" name="q3" value="D"> D. TCL</label>
+                </div>
+                <div class="question">
+                    <p>4. Which of the following is a key used to link two tables?</p>
+                    <label><input type="radio" name="q4" value="A"> A. Primary Key</label>
+                    <label><input type="radio" name="q4" value="B"> B. Foreign Key</label>
+                    <label><input type="radio" name="q4" value="C"> C. Candidate Key</label>
+                    <label><input type="radio" name="q4" value="D"> D. Super Key</label>
+                </div>
+                <div class="question">
+                    <p>5. The process of organizing data to reduce redundancy is called?</p>
+                    <label><input type="radio" name="q5" value="A"> A. Indexing</label>
+                    <label><input type="radio" name="q5" value="B"> B. Normalization</label>
+                    <label><input type="radio" name="q5" value="C"> C. Denormalization</label>
+                    <label><input type="radio" name="q5" value="D"> D. Querying</label>
+                </div>
+                <div class="question">
+                    <p>6. What is the purpose of the <code>SELECT</code> statement?</p>
+                    <label><input type="radio" name="q6" value="A"> A. To create a new table</label>
+                    <label><input type="radio" name="q6" value="B"> B. To delete data</label>
+                    <label><input type="radio" name="q6" value="C"> C. To retrieve data</label>
+                    <label><input type="radio" name="q6" value="D"> D. To update data</label>
+                </div>
+                <div class="question">
+                    <p>7. A table is in which normal form if it has no repeating groups?</p>
+                    <label><input type="radio" name="q7" value="A"> A. 1NF</label>
+                    <label><input type="radio" name="q7" value="B"> B. 2NF</label>
+                    <label><input type="radio" name="q7" value="C"> C. 3NF</label>
+                    <label><input type="radio" name="q7" value="D"> D. BCNF</label>
+                </div>
+                <div class="question">
+                    <p>8. What is a collection of structured data typically stored electronically?</p>
+                    <label><input type="radio" name="q8" value="A"> A. A file</label>
+                    <label><input type="radio" name="q8" value="B"> B. A folder</label>
+                    <label><input type="radio" name="q8" value="C"> C. A database</label>
+                    <label><input type="radio" name="q8" value="D"> D. A program</label>
+                </div>
+                <div class="question">
+                    <p>9. Which component of a DBMS refers to the rules and instructions for using the database?</p>
+                    <label><input type="radio" name="q9" value="A"> A. Data</label>
+                    <label><input type="radio" name="q9" value="B"> B. Procedures</label>
+                    <label><input type="radio" name="q9" value="C"> C. Software</label>
+                    <label><input type="radio" name="q9" value="D"> D. Users</label>
+                </div>
+                <div class="question">
+                    <p>10. What is a row in a relational database table also known as?</p>
+                    <label><input type="radio" name="q10" value="A"> A. An attribute</label>
+                    <label><input type="radio" name="q10" value="B"> B. A field</label>
+                    <label><input type="radio" name="q10" value="C"> C. A column</label>
+                    <label><input type="radio" name="q10" value="D"> D. A record</label>
+                </div>
+                <button type="button" id="submit-test-button">Submit Test</button>
+            </form>
+            <div id="result-container" class="hidden"></div>
+        `;
+        
+        // Define correct answers
+        const correctAnswers = {
+            q1: 'C', q2: 'C', q3: 'C', q4: 'B', q5: 'B',
+            q6: 'C', q7: 'A', q8: 'C', q9: 'B', q10: 'D',
+        };
+
+        function loadPage(page) {
+            notesContainer.innerHTML = page;
+            setupEventListeners();
+        }
+        
+        function setupEventListeners() {
+            const nextPageButton = document.getElementById('next-page-button');
+            const startTestButton = document.getElementById('start-test-button');
+            const submitTestButton = document.getElementById('submit-test-button');
+
+            if (nextPageButton) {
+                nextPageButton.addEventListener('click', () => {
+                    loadPage(page2Content);
+                    const newNextPageButton = document.getElementById('next-page-button');
+                    if (newNextPageButton) {
+                         newNextPageButton.classList.add('hidden');
+                    }
+                });
+            }
+
+            if (startTestButton) {
+                startTestButton.addEventListener('click', () => {
+                    loadPage(testContent);
+                });
+            }
+
+            if (submitTestButton) {
+                submitTestButton.addEventListener('click', () => {
+                    const form = document.getElementById('quiz-form');
+                    const resultContainer = document.getElementById('result-container');
+                    let score = 0;
+                    for (let i = 1; i <= 10; i++) {
+                        const questionName = `q${i}`;
+                        const selectedOption = form.querySelector(`input[name="${questionName}"]:checked`);
+                        if (selectedOption && selectedOption.value === correctAnswers[questionName]) {
+                            score++;
+                        }
+                    }
+                    resultContainer.textContent = `You scored ${score} out of 10!`;
+                    resultContainer.classList.remove('hidden');
+                });
+            }
+        }
+
+        // Load the initial content on page load
+        window.onload = () => {
+            loadPage(page1Content);
+        };
+    </script>
+
+</body>
+</html>
